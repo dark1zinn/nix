@@ -98,13 +98,20 @@
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
   programs.steam = {
     enable = true;
     localNetworkGameTransfers.openFirewall = true;
   };
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    config = {
+      init.defaultBranch = "main";
+      user = {
+        name = "dark1zinn";
+        email = "edilsonjuininho154@gmail.com";
+      };
+    };
+  };
   virtualisation.docker = {
     enable = true;
     rootless = {
