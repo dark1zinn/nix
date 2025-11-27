@@ -7,16 +7,18 @@
 
   };
 
-  systemd.user.services.niri-flake-polkit.enable = false;
-
   imports = [
     inputs.zen-browser.homeModules.twilight
     # inputs.zen-browser.homeModules.beta
     # inputs.zen-browser.homeModules.twilight-official
     inputs.dankMaterialShell.homeModules.dankMaterialShell.default
     inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
+    inputs.niri.homeModules.niri
   ];
 
+  systemd.enable = true;
+  systemd.user.services.niri-flake-polkit.enable = false;
+  programs.niri.enableSpawn = true;
   programs.zen-browser.enable = true;
   programs.dankMaterialShell = {
     enable = true;

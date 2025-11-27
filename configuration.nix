@@ -97,6 +97,7 @@
       lazydocker
       spotify
       gh
+      neovim
     ];
   };
 
