@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.niri.nixosModules.niri
     ];
 
   # Bootloader.
@@ -129,10 +130,11 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+    fuzzel
+    alacritty
     docker
     docker-compose
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
-    inputs.niri.nixosModules.niri
   ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
