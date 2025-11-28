@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.niri.nixosModules.niri
+      inputs.dankMaterialShell.nixosModules.dankMaterialShell
     ];
 
   # Bootloader.
@@ -51,6 +52,7 @@
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
   programs.niri.enable = true;
+  programs.dankMaterialShell.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -135,6 +137,7 @@
     alacritty
     docker
     docker-compose
+    xwayland-satellite
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
   ];
   
