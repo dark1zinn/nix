@@ -4,15 +4,11 @@
     username = "dark1zin";
     homeDirectory = "/home/dark1zin";
     stateVersion = "25.11";
-
   };
 
   imports = [
     inputs.zen-browser.homeModules.twilight
-    # inputs.zen-browser.homeModules.beta
-    # inputs.zen-browser.homeModules.twilight-official
     inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
-    # inputs.dankMaterialShell.homeModules.dankMaterialShell.default
     inputs.vicinae.homeModules.default
   ];
 
