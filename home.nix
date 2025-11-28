@@ -11,9 +11,8 @@
     inputs.zen-browser.homeModules.twilight
     # inputs.zen-browser.homeModules.beta
     # inputs.zen-browser.homeModules.twilight-official
-    # inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
-    inputs.dankMaterialShell.homeModules.dankMaterialShell.default
-    inputs.niri.homeModules.niri
+    inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
+    # inputs.dankMaterialShell.homeModules.dankMaterialShell.default
   ];
 
   systemd.enable = true;

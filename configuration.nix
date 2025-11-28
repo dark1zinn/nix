@@ -52,7 +52,24 @@
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
   programs.niri.enable = true;
-  programs.dankMaterialShell.enable = true;
+  programs.dankMaterialShell = {
+    enable = true;
+    systemd = {
+      enable = true;             # Systemd service for auto-start
+      restartIfChanged = true;   # Auto-restart dms.service when dankMaterialShell changes
+    };
+  
+    # Core features
+    enableSystemMonitoring = true;     # System monitoring widgets (dgop)
+    enableClipboard = true;            # Clipboard history manager
+    enableVPN = false;                  # VPN management widget
+    enableBrightnessControl = true;    # Backlight/brightness controls
+    enableColorPicker = true;          # Color picker tool
+    enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
+    enableAudioWavelength = false;      # Audio visualizer (cava)
+    enableCalendarEvents = true;       # Calendar integration (khal)
+    enableSystemSound = true;          # System sound effects
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -99,7 +116,6 @@
       lazydocker
       spotify
       gh
-      neovim
     ];
   };
 
@@ -131,8 +147,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    neovim
     fuzzel
     alacritty
     docker
