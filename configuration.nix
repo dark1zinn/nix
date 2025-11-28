@@ -8,6 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.niri.nixosModules.niri
+      inputs.dankMaterialShell.nixosModules.dankMaterialShell
+      inputs.dankMaterialShell.nixosModules.greeter
     ];
 
   # Bootloader.
@@ -47,8 +50,35 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # services.displayManager.sddm.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+  programs.niri.enable = true;
+  programs.dankMaterialShell = {
+    enable = true;
+    systemd = {
+      enable = true;             # Systemd service for auto-start
+      restartIfChanged = true;   # Auto-restart dms.service when dankMaterialShell changes
+    };
+  
+    # Core features
+    enableSystemMonitoring = true;     # System monitoring widgets (dgop)
+    enableClipboard = true;            # Clipboard history manager
+    enableVPN = false;                  # VPN management widget
+    enableBrightnessControl = true;    # Backlight/brightness controls
+    enableColorPicker = true;          # Color picker tool
+    enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
+    enableAudioWavelength = false;      # Audio visualizer (cava)
+    enableCalendarEvents = true;       # Calendar integration (khal)
+    enableSystemSound = true;          # System sound effects
+  };
+  programs.dankMaterialShell.greeter = {
+    enable = true;
+    compositor.name = "niri";  # Or "hyprland" or "sway"
+    configHome = "/home/dark1zin";
+    configFiles = [
+      "/home/dark1zin/.config/DankMaterialShell/settings.json"
+    ];
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -58,9 +88,6 @@
 
   # Configure console keymap
   console.keyMap = "br-abnt2";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -122,14 +149,17 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  docker
-  docker-compose
-  inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
+    neovim
+    fuzzel
+    alacritty
+    docker
+    docker-compose
+    xwayland-satellite
+    inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
   ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
