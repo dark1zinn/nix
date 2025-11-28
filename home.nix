@@ -13,6 +13,7 @@
     # inputs.zen-browser.homeModules.twilight-official
     inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
     # inputs.dankMaterialShell.homeModules.dankMaterialShell.default
+    inputs.vicinae.homeModules.default
   ];
 
   systemd.enable = true;
@@ -46,5 +47,13 @@
     enableAudioWavelength = false;      # Audio visualizer (cava)
     enableCalendarEvents = true;       # Calendar integration (khal)
     enableSystemSound = true;          # System sound effects
+  };
+  services.vicinae = {
+    enable = true; # default: false
+    autoStart = true; # default: true
+    # package = # specify package to use here. Can be omitted.
+    settings = {
+      theme.name = "vicinae-dark";
+    };
   };
 }
