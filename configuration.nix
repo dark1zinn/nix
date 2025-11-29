@@ -157,6 +157,7 @@
     fuzzel
     alacritty
     docker
+    vicinae
     docker-compose
     xwayland-satellite
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
