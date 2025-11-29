@@ -8,9 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.niri.nixosModules.niri
-      inputs.dankMaterialShell.nixosModules.dankMaterialShell
-      inputs.dankMaterialShell.nixosModules.greeter
+#      inputs.niri.nixosModules.niri
+#      inputs.dankMaterialShell.nixosModules.dankMaterialShell
+#      inputs.dankMaterialShell.nixosModules.greeter
     ];
 
   # Bootloader.
@@ -52,33 +52,33 @@
   # Enable the KDE Plasma Desktop Environment.
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
-  programs.niri.enable = true;
-  programs.dankMaterialShell = {
-    enable = true;
-    systemd = {
-      enable = true;             # Systemd service for auto-start
-      restartIfChanged = true;   # Auto-restart dms.service when dankMaterialShell changes
-    };
-  
-    # Core features
-    enableSystemMonitoring = true;     # System monitoring widgets (dgop)
-    enableClipboard = true;            # Clipboard history manager
-    enableVPN = false;                  # VPN management widget
-    enableBrightnessControl = true;    # Backlight/brightness controls
-    enableColorPicker = true;          # Color picker tool
-    enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
-    enableAudioWavelength = false;      # Audio visualizer (cava)
-    enableCalendarEvents = true;       # Calendar integration (khal)
-    enableSystemSound = true;          # System sound effects
-  };
-  programs.dankMaterialShell.greeter = {
-    enable = true;
-    compositor.name = "niri";  # Or "hyprland" or "sway"
-    configHome = "/home/dark1zin";
-    configFiles = [
-      "/home/dark1zin/.config/DankMaterialShell/settings.json"
-    ];
-  };
+#  programs.niri.enable = true;
+#  programs.dankMaterialShell = {
+#    enable = true;
+#    systemd = {
+#      enable = true;             # Systemd service for auto-start
+#      restartIfChanged = true;   # Auto-restart dms.service when dankMaterialShell changes
+#    };
+#
+#    # Core features
+#    enableSystemMonitoring = true;     # System monitoring widgets (dgop)
+#    enableClipboard = true;            # Clipboard history manager
+#    enableVPN = false;                  # VPN management widget
+#    enableBrightnessControl = true;    # Backlight/brightness controls
+#    enableColorPicker = true;          # Color picker tool
+#    enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
+#    enableAudioWavelength = false;      # Audio visualizer (cava)
+#    enableCalendarEvents = true;       # Calendar integration (khal)
+#    enableSystemSound = true;          # System sound effects
+#  };
+#  programs.dankMaterialShell.greeter = {
+#    enable = true;
+#    compositor.name = "niri";  # Or "hyprland" or "sway"
+#    configHome = "/home/dark1zin";
+#    configFiles = [
+#      "/home/dark1zin/.config/DankMaterialShell/settings.json"
+#    ];
+#  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -149,7 +149,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+#  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

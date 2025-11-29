@@ -14,6 +14,7 @@
 
   systemd.enable = true;
   systemd.user.services.niri-flake-polkit.enable = false;
+  programs.niri.enable = true;
   programs.niri.enableSpawn = true;
   programs.niri.settings.environment."NIXOS_OZONE_WL" = "1";
   programs.zen-browser.enable = true;
@@ -27,12 +28,10 @@
       enable = true;             # Systemd service for auto-start
       restartIfChanged = true;   # Auto-restart dms.service when dankMaterialShell changes
     };
-
     default.settings = {
       theme = "dark";
       dynamicTheming = true;
     };
-  
     # Core features
     enableSystemMonitoring = true;     # System monitoring widgets (dgop)
     enableClipboard = true;            # Clipboard history manager
@@ -43,6 +42,15 @@
     enableAudioWavelength = false;      # Audio visualizer (cava)
     enableCalendarEvents = true;       # Calendar integration (khal)
     enableSystemSound = true;          # System sound effects
+    # Greeter
+    greeter = {
+	  enable = true;
+	  compositor.name = "niri";  # Or "hyprland" or "sway"
+	  configHome = "/home/dark1zin";
+	  configFiles = [
+		"/home/dark1zin/.config/DankMaterialShell/settings.json"
+	  ];
+	};
   };
   services.vicinae = {
     enable = true; # default: false
