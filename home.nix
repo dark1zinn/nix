@@ -51,4 +51,27 @@
       theme.name = "vicinae-dark";
     };
   };
+
+  # 1. Enable the pointer cursor settings
+  home.pointerCursor = {
+    enable = true;
+    # Set the cursor theme package to the one you installed
+    package = pkgs.apple-cursor;
+    # Set the name of the cursor theme
+    name = "Apple Cursor";
+    # You can also set a specific size (e.g., 24, 32, 48)
+    size = 24; 
+    
+    # Enable it for X11 applications
+    x11.enable = true;
+    # Enable it for GTK applications (like Firefox, Gnome apps)
+    gtk.enable = true;
+  };
+
+  # 2. (Optional but recommended) Ensure GTK explicitly uses the same theme
+  gtk.enable = true;
+  gtk.cursorTheme = {
+    package = pkgs.apple-cursor;
+    name = "Apple Cursor";
+  };
 }
