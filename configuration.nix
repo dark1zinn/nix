@@ -8,9 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.niri.nixosModules.niri
-      inputs.dankMaterialShell.nixosModules.dankMaterialShell
-      inputs.dankMaterialShell.nixosModules.greeter
+     inputs.niri.nixosModules.niri
+     inputs.dankMaterialShell.nixosModules.dankMaterialShell
+     inputs.dankMaterialShell.nixosModules.greeter
     ];
 
   # Bootloader.
@@ -53,13 +53,14 @@
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
   programs.niri.enable = true;
+
   programs.dankMaterialShell = {
     enable = true;
     systemd = {
       enable = true;             # Systemd service for auto-start
       restartIfChanged = true;   # Auto-restart dms.service when dankMaterialShell changes
     };
-  
+    
     # Core features
     enableSystemMonitoring = true;     # System monitoring widgets (dgop)
     enableClipboard = true;            # Clipboard history manager
@@ -70,14 +71,16 @@
     enableAudioWavelength = false;      # Audio visualizer (cava)
     enableCalendarEvents = true;       # Calendar integration (khal)
     enableSystemSound = true;          # System sound effects
-  };
-  programs.dankMaterialShell.greeter = {
-    enable = true;
-    compositor.name = "niri";  # Or "hyprland" or "sway"
-    configHome = "/home/dark1zin";
-    configFiles = [
-      "/home/dark1zin/.config/DankMaterialShell/settings.json"
-    ];
+    quickshell.package = pkgs.quickshell;
+    
+    greeter = {
+      enable = true;
+      compositor.name = "niri";  # Or "hyprland" or "sway"
+      # configHome = "/home/dark1zin";
+      # configFiles = [
+      #   "/home/dark1zin/.config/DankMaterialShell/settings.json"
+      # ];
+    };
   };
 
   # Configure keymap in X11
@@ -128,6 +131,7 @@
   programs.steam = {
     enable = true;
     localNetworkGameTransfers.openFirewall = true;
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
   programs.git = {
     enable = true;
@@ -148,19 +152,29 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [ inputs.niri.overlays.niri ];
+  };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
     fuzzel
     alacritty
+    accountsservice
+    upower
     docker
+    vicinae
     docker-compose
     xwayland-satellite
+    apple-cursor
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
   ];
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
