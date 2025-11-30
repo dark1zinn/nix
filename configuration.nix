@@ -134,6 +134,7 @@
     enable = true;
     localNetworkGameTransfers.openFirewall = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    extraPackages = with pkgs; [ apple-cursor ];
   };
   programs.git = {
     enable = true;
