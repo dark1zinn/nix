@@ -167,7 +167,7 @@
     docker
     vicinae
     docker-compose
-    # xwayland-satellite
+    xwayland-satellite
     apple-cursor
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
   ];
