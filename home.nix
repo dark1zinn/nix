@@ -44,13 +44,13 @@
     enableSystemSound = true;          # System sound effects
     # Greeter
     greeter = {
-	  enable = true;
-	  compositor.name = "niri";  # Or "hyprland" or "sway"
-	  configHome = "/home/dark1zin";
-	  configFiles = [
-		"/home/dark1zin/.config/DankMaterialShell/settings.json"
-	  ];
-	};
+	    enable = true;
+	    compositor.name = "niri";  # Or "hyprland" or "sway"
+	    configHome = "/home/dark1zin";
+	    configFiles = [
+		    "/home/dark1zin/.config/DankMaterialShell/settings.json"
+	    ];
+	  };
   };
   services.vicinae = {
     enable = true; # default: false

@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
 #      inputs.niri.nixosModules.niri
 #      inputs.dankMaterialShell.nixosModules.dankMaterialShell
-#      inputs.dankMaterialShell.nixosModules.greeter
+     inputs.dankMaterialShell.nixosModules.greeter
     ];
 
   # Bootloader.
@@ -71,14 +71,14 @@
 #    enableCalendarEvents = true;       # Calendar integration (khal)
 #    enableSystemSound = true;          # System sound effects
 #  };
-#  programs.dankMaterialShell.greeter = {
-#    enable = true;
-#    compositor.name = "niri";  # Or "hyprland" or "sway"
-#    configHome = "/home/dark1zin";
-#    configFiles = [
-#      "/home/dark1zin/.config/DankMaterialShell/settings.json"
-#    ];
-#  };
+ programs.dankMaterialShell.greeter = {
+   enable = true;
+   compositor.name = "niri";  # Or "hyprland" or "sway"
+   configHome = "/home/dark1zin";
+   configFiles = [
+     "/home/dark1zin/.config/DankMaterialShell/settings.json"
+   ];
+ };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -161,6 +161,7 @@
     vicinae
     docker-compose
     xwayland-satellite
+    apple-cursor
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
   ];
   
