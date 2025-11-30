@@ -16,7 +16,7 @@
   systemd.user.services.niri-flake-polkit.enable = false;
   programs.niri.enable = true;
   programs.niri.enableSpawn = true;
-  programs.niri.settings.environment."NIXOS_OZONE_WL" = "1";
+  # programs.niri.settings.environment."NIXOS_OZONE_WL" = "1";
   programs.zen-browser.enable = true;
   programs.dankMaterialShell = {
     enable = true;

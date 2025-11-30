@@ -167,10 +167,14 @@
     docker
     vicinae
     docker-compose
-    xwayland-satellite
+    # xwayland-satellite
     apple-cursor
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
   ];
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
