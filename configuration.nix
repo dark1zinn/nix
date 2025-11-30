@@ -170,6 +170,7 @@
     docker-compose
     xwayland-satellite
     apple-cursor
+    quickshell
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
   ];
 
