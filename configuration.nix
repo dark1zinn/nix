@@ -107,6 +107,8 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+  services.upower.enable = true;
+  services.accounts-daemon.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -172,6 +174,7 @@
     apple-cursor
     quickshell
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
+    google-chrome
   ];
 
   environment.sessionVariables = {
