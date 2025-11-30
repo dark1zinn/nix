@@ -163,6 +163,7 @@
     fuzzel
     alacritty
     accountsservice
+    upower
     docker
     vicinae
     docker-compose
