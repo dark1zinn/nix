@@ -162,6 +162,7 @@
     neovim
     fuzzel
     alacritty
+    accountsservice
     docker
     vicinae
     docker-compose
