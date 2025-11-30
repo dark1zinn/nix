@@ -52,26 +52,26 @@
     };
   };
 
-  # 1. Enable the pointer cursor settings
   home.pointerCursor = {
     enable = true;
-    # Set the cursor theme package to the one you installed
+    name = "macOS";
     package = pkgs.apple-cursor;
-    # Set the name of the cursor theme
-    name = "Apple Cursor";
-    # You can also set a specific size (e.g., 24, 32, 48)
-    size = 24; 
-    
-    # Enable it for X11 applications
-    x11.enable = true;
-    # Enable it for GTK applications (like Firefox, Gnome apps)
-    gtk.enable = true;
-  };
+    size = 32;
 
-  # 2. (Optional but recommended) Ensure GTK explicitly uses the same theme
-  gtk.enable = true;
-  gtk.cursorTheme = {
-    package = pkgs.apple-cursor;
-    name = "Apple Cursor";
+    dotIcons.enable = true;
+    gtk.enable = true;
+    hyprcursor.enable = true;
+    sway.enable = true;
+    x11.enable = true;
   };
+  home.sessionVariables = {
+    XCURSOR_THEME = "macOS";
+    XCURSOR_SIZE = "32"; # Must be a string for environment variables
+    XCURSOR_SUPPRESS_RANDR_SIZE = "1"; 
+  };
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; 
+  };
+  gtk.enable = true;
 }
