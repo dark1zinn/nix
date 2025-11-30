@@ -164,6 +164,7 @@
     alacritty
     accountsservice
     upower
+    dbus
     docker
     vicinae
     docker-compose
