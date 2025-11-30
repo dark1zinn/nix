@@ -82,6 +82,10 @@
       # ];
     };
   };
+  xdg.icons = {
+    enable = true;
+    fallbackCursorThemes = ["apple-cursor"];
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
