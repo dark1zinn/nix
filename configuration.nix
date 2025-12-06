@@ -146,6 +146,13 @@
       };
     };
   };
+  programs.yazi = {
+    enable = true;
+  };
+  programs.starship = {
+    enable = true;
+    presets = [ "nerd-font-symbols" ];
+  };
   virtualisation.docker = {
     enable = true;
     rootless = {
@@ -163,7 +170,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
-    fuzzel
     alacritty
     accountsservice
     upower
@@ -176,6 +182,8 @@
     quickshell
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
     google-chrome
+    yazi
+    starship
   ];
 
   environment.sessionVariables = {
