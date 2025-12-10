@@ -184,6 +184,8 @@
     google-chrome
     yazi
     starship
+    obs-studio
+    obsidian
   ];
 
   environment.sessionVariables = {
