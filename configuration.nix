@@ -186,6 +186,7 @@
     starship
     obs-studio
     obsidian
+    vlc
   ];
 
   environment.sessionVariables = {
