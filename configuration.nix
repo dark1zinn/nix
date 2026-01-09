@@ -187,6 +187,8 @@
     obs-studio
     obsidian
     vlc
+    btop
+    vesktop
   ];
 
   environment.sessionVariables = {
