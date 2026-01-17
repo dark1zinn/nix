@@ -123,6 +123,7 @@
       bun
       vscode
       labymod-launcher
+      modrinth-app
       fastfetch
       lazydocker
       spotify
