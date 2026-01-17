@@ -10,6 +10,7 @@
     inputs.zen-browser.homeModules.twilight
     inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
     inputs.vicinae.homeModules.default
+    inputs.xmcl.homeModules.xmcl
   ];
 
   systemd.enable = true;
@@ -50,6 +51,16 @@
     settings = {
       theme.name = "vicinae-dark";
     };
+  };
+  programs.xmcl = {
+    enable = true;
+    commandLineArgs = [
+      "--password-store=\"gnome-libsecret\""
+    ];
+    jres = [
+      pkgs.jre8
+      pkgs.temurin-jre-bin-17
+    ];
   };
 
   home.pointerCursor = {
