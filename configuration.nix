@@ -128,6 +128,7 @@
       lazydocker
       spotify
       gh
+      heroic
     ];
   };
 
