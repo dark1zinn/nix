@@ -58,7 +58,6 @@
     # Enable the AMDGPU driver and openGL/Vulkan support
     opengl = {
       enable = true;
-      driSupport = true;
       driSupport32Bit = true; # For 32-bit applications/games
     };
   };
