@@ -49,6 +49,33 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
+  # some gpu stuff
+  hardware = { 
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+    # Enable the AMDGPU driver and openGL/Vulkan support
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true; # For 32-bit applications/games
+    };
+  };
+  # Load the amdgpu module during initrd for early KMS (flicker-free boot)
+  boot.initrd.kernelModules = [ "amdgpu" ];
+
+  # Specify the driver for the X server
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  # Other useful modules/options
+  # hardware.amdgpu.opencl.enable = true; # For OpenCL support (ROCm)
+  # hardware.amdgpu.amdvlk.enable = true; # Alternative Vulkan driver (optional)
+
+  # For older cards (GCN 1/2) to use amdgpu instead of radeon
+  # boot.kernelParams = [ "radeon.si_support=0" "amdgpu.si_support=1" "radeon.cik_support=0" "amdgpu.cik_support=1" ];
+
+
   # Enable the KDE Plasma Desktop Environment.
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
