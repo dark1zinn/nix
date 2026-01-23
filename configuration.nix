@@ -145,7 +145,6 @@
     description = "dark1zin";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
-      discord-ptb
       bun
       vscode
       labymod-launcher
