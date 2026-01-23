@@ -153,7 +153,6 @@
       spotify
       gh
       heroic
-      lapce
       vesktop
     ];
   };
