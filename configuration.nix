@@ -155,6 +155,7 @@
       gh
       heroic
       lapce
+      vesktop
     ];
   };
 
@@ -222,7 +223,6 @@
     obsidian
     vlc
     btop
-    vesktop
   ];
 
   environment.sessionVariables = {
