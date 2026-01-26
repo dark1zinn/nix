@@ -146,6 +146,7 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       vscode
+      zed-editor-fhs
       labymod-launcher
       fastfetch
       lazydocker
