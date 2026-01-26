@@ -221,6 +221,8 @@
     obsidian
     vlc
     btop
+    direnv
+    nixd
   ];
   
   environment.shellAliases = {
