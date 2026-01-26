@@ -145,7 +145,6 @@
     description = "dark1zin";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
-      bun
       vscode
       labymod-launcher
       fastfetch
