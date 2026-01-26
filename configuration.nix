@@ -222,6 +222,11 @@
     vlc
     btop
   ];
+  
+  environment.shellAliases = {
+    zed = "zeditor";
+    buildnix = "sudo nixos-rebuild switch --flake ~/nixos/#nixos";
+  };
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
