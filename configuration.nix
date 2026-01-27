@@ -224,6 +224,7 @@
     btop
     direnv
     nixd
+    nerd-fonts.caskaydia-mono
   ];
   
   environment.shellAliases = {
