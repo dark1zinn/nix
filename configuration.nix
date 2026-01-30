@@ -185,6 +185,9 @@
     enable = true;
     presets = [ "nerd-font-symbols" ];
   };
+  programs.direnv = {
+    enable = true;
+  };
   virtualisation.docker = {
     enable = true;
     rootless = {
