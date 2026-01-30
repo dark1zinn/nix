@@ -50,7 +50,7 @@
   services.xserver.enable = true;
 
   # some gpu stuff
-  hardware = { 
+  hardware = {
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -86,7 +86,7 @@
       enable = true;             # Systemd service for auto-start
       restartIfChanged = true;   # Auto-restart dms.service when dankMaterialShell changes
     };
-    
+
     # Core features
     enableSystemMonitoring = true;     # System monitoring widgets (dgop)
     # enableClipboard = true;            # Clipboard history manager
@@ -98,7 +98,7 @@
     enableCalendarEvents = true;       # Calendar integration (khal)
     # enableSystemSound = true;          # System sound effects
     quickshell.package = pkgs.quickshell;
-    
+
     greeter = {
       enable = true;
       compositor.name = "niri";  # Or "hyprland" or "sway"
@@ -228,16 +228,21 @@
     nixd
     nerd-fonts.caskaydia-mono
   ];
-  
+
   environment.shellAliases = {
     zed = "zeditor";
     buildnix = "sudo nixos-rebuild switch --flake ~/nixos/#nixos";
   };
+  # environment.interactiveShellInit = ''
+  #   nixinit() {
+  #     nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#$1"
+  #   }
+  # '';
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
   };
-  
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 
