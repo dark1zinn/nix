@@ -238,6 +238,21 @@
   #     nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#$1"
   #   }
   # '';
+  fonts.packages = [
+    (pkgs.nerd-fonts.jetbrains-mono.overrideAttrs (o: {
+      nativeBuildInputs = [ pkgs.nerd-font-patcher ];
+      postInstall = ''
+        mkdir -p $out/share/fonts/truetype/{jetbrains-mono,jetbrains-mono-nerd}
+        mv $out/share/fonts/truetype/*.ttf $out/share/fonts/truetype/jetbrains-mono/
+        printf "[Config]\ncommandline: --removeligatures --makegroups 2\n[Subtables]\nligatures: [ \"'dlig' Discretionary Ligatures lookup 9 subtable\", \"'dlig' Discretionary Ligatures lookup 11 subtable\", \"'dlig' Discretionary Ligatures lookup 12 contextual 0\" ]" > nerd.cfg
+        for f in $out/share/fonts/truetype/jetbrains-mono/*.ttf; do
+            nerd-font-patcher --complete --outputdir $out/share/fonts/truetype/jetbrains-mono-nerd/ $f
+        done
+        rm nerd.cfg
+        rm -rf $out/share/fonts/truetype/jetbrains-mono/
+      '';
+    }))
+  ];
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
