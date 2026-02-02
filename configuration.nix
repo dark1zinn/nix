@@ -225,7 +225,7 @@
     vlc
     btop
     direnv
-    nixd
+    nil
     nerd-fonts.caskaydia-mono
   ];
 
