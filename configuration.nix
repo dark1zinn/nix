@@ -8,9 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.niri.nixosModules.niri
-      inputs.dankMaterialShell.nixosModules.dankMaterialShell
-      inputs.dankMaterialShell.nixosModules.greeter
+     inputs.niri.nixosModules.niri
+     inputs.dankMaterialShell.nixosModules.dankMaterialShell
+     inputs.dankMaterialShell.nixosModules.greeter
     ];
 
   # Bootloader.
@@ -49,35 +49,64 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
+  # some gpu stuff
+  hardware = {
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+    # Enable the AMDGPU driver and openGL/Vulkan support
+    opengl = {
+      enable = true;
+      driSupport32Bit = true; # For 32-bit applications/games
+    };
+  };
+  # Load the amdgpu module during initrd for early KMS (flicker-free boot)
+  boot.initrd.kernelModules = [ "amdgpu" ];
+
+  # Specify the driver for the X server
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  # Other useful modules/options
+  # hardware.amdgpu.opencl.enable = true; # For OpenCL support (ROCm)
+  # hardware.amdgpu.amdvlk.enable = true; # Alternative Vulkan driver (optional)
+
+  # For older cards (GCN 1/2) to use amdgpu instead of radeon
+  # boot.kernelParams = [ "radeon.si_support=0" "amdgpu.si_support=1" "radeon.cik_support=0" "amdgpu.cik_support=1" ];
+
+
   # Enable the KDE Plasma Desktop Environment.
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
   programs.niri.enable = true;
+
   programs.dankMaterialShell = {
     enable = true;
     systemd = {
       enable = true;             # Systemd service for auto-start
       restartIfChanged = true;   # Auto-restart dms.service when dankMaterialShell changes
     };
-  
+
     # Core features
     enableSystemMonitoring = true;     # System monitoring widgets (dgop)
-    enableClipboard = true;            # Clipboard history manager
+    # enableClipboard = true;            # Clipboard history manager
     enableVPN = false;                  # VPN management widget
-    enableBrightnessControl = true;    # Backlight/brightness controls
-    enableColorPicker = true;          # Color picker tool
+    # enableBrightnessControl = true;    # Backlight/brightness controls
+    # enableColorPicker = true;          # Color picker tool
     enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
     enableAudioWavelength = false;      # Audio visualizer (cava)
     enableCalendarEvents = true;       # Calendar integration (khal)
-    enableSystemSound = true;          # System sound effects
-  };
-  programs.dankMaterialShell.greeter = {
-    enable = true;
-    compositor.name = "niri";  # Or "hyprland" or "sway"
-    configHome = "/home/dark1zin";
-    configFiles = [
-      "/home/dark1zin/.config/DankMaterialShell/settings.json"
-    ];
+    # enableSystemSound = true;          # System sound effects
+    quickshell.package = pkgs.quickshell;
+
+    greeter = {
+      enable = true;
+      compositor.name = "niri";  # Or "hyprland" or "sway"
+      # configHome = "/home/dark1zin";
+      # configFiles = [
+      #   "/home/dark1zin/.config/DankMaterialShell/settings.json"
+      # ];
+    };
   };
 
   # Configure keymap in X11
@@ -104,6 +133,8 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+  services.upower.enable = true;
+  services.accounts-daemon.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -114,20 +145,28 @@
     description = "dark1zin";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
-      discord-ptb
-      bun
       vscode
+      zed-editor
       labymod-launcher
       fastfetch
       lazydocker
       spotify
       gh
+      heroic
+      vesktop
     ];
   };
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+  ];
   programs.steam = {
     enable = true;
     localNetworkGameTransfers.openFirewall = true;
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    extraPackages = with pkgs; [ apple-cursor ];
   };
   programs.git = {
     enable = true;
@@ -139,6 +178,16 @@
       };
     };
   };
+  programs.yazi = {
+    enable = true;
+  };
+  programs.starship = {
+    enable = true;
+    presets = [ "nerd-font-symbols" ];
+  };
+  programs.direnv = {
+    enable = true;
+  };
   virtualisation.docker = {
     enable = true;
     rootless = {
@@ -148,20 +197,55 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [ inputs.niri.overlays.niri ];
+  };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
-    fuzzel
     alacritty
+    accountsservice
+    upower
+    dbus
     docker
+    vicinae
     docker-compose
     xwayland-satellite
+    apple-cursor
+    quickshell
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
+    inputs.xmcl.packages."${pkgs.stdenv.hostPlatform.system}".default
+    google-chrome
+    yazi
+    starship
+    obs-studio
+    obsidian
+    vlc
+    btop
+    direnv
+    nixd
+    nerd-fonts.caskaydia-mono
   ];
-  
+
+  environment.shellAliases = {
+    zed = "zeditor";
+    buildnix = "sudo nixos-rebuild switch --flake ~/nixos/#nixos";
+  };
+  # environment.interactiveShellInit = ''
+  #   nixinit() {
+  #     nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#$1"
+  #   }
+  # '';
+  fonts.packages = with pkgs; [
+    nerd-fonts.lilex
+  ];
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 

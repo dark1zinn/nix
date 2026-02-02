@@ -34,6 +34,11 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    xmcl = {
+      url = "github:x45iq/xmcl-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, ... }: {
@@ -42,6 +47,14 @@
       modules = [
         ./configuration.nix
       ];
+    };
+    homeConfigurations = {
+      "dark1zin" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [
+          ./home.nix
+        ];
+      };
     };
   };
 }
