@@ -21,7 +21,7 @@
       
       networking = {
         # Define your hostname.
-        hostName = "nixos";
+        hostName = "laptop";
         
         # Enable networking
         networkmanager.enable = true;
