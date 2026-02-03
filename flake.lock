@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "dankMaterialShell": {
+    "dank-material-shell": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -8,11 +8,11 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1769572228,
-        "narHash": "sha256-UpJEpUf+56XIaFEWtaWzIwG724tpPzi782P/FfgltEc=",
+        "lastModified": 1770067799,
+        "narHash": "sha256-x2RlBiAP03i1DFMNDwTrdekoQAZZP/6zl0cGfIKnFlE=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "eda59b348c84e5c0282b150f4a9017d34079679b",
+        "rev": "a97409dfd70caa3a29f95950c7b76fce018bf727",
         "type": "github"
       },
       "original": {
@@ -21,23 +21,23 @@
         "type": "github"
       }
     },
-    "dgop": {
+    "flake-parts": {
       "inputs": {
-        "nixpkgs": [
+        "nixpkgs-lib": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1769289335,
-        "narHash": "sha256-NBGF7bo+nYSToDWtIXMwPeulzRxphX8JHzNRqLTOOqU=",
-        "owner": "AvengeMedia",
-        "repo": "dgop",
-        "rev": "3cd297080573319c36884b28a3cc0dbfed79f53e",
+        "lastModified": 1769996383,
+        "narHash": "sha256-AnYjnFWgS49RlqX7LrC4uA+sCCDBj0Ry/WOJ5XWAsa0=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "57928607ea566b5db3ad13af0e57e921e6b12381",
         "type": "github"
       },
       "original": {
-        "owner": "AvengeMedia",
-        "repo": "dgop",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
         "type": "github"
       }
     },
@@ -58,6 +58,21 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "import-tree": {
+      "locked": {
+        "lastModified": 1763762820,
+        "narHash": "sha256-ZvYKbFib3AEwiNMLsejb/CWs/OL/srFQ8AogkebEPF0=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "3c23749d8013ec6daa1d7255057590e9ca726646",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "import-tree",
         "type": "github"
       }
     },
@@ -154,7 +169,7 @@
     "quickshell": {
       "inputs": {
         "nixpkgs": [
-          "dankMaterialShell",
+          "dank-material-shell",
           "nixpkgs"
         ]
       },
@@ -175,9 +190,10 @@
     },
     "root": {
       "inputs": {
-        "dankMaterialShell": "dankMaterialShell",
-        "dgop": "dgop",
+        "dank-material-shell": "dank-material-shell",
+        "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "import-tree": "import-tree",
         "niri": "niri",
         "nixpkgs": "nixpkgs",
         "xmcl": "xmcl",
