@@ -147,7 +147,7 @@
     packages = with pkgs; [
       vscode
       zed-editor
-      modrinth-app-unwrapped
+      modrinth-app
       labymod-launcher
       fastfetch
       lazydocker
