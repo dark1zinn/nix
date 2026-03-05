@@ -147,6 +147,7 @@
     packages = with pkgs; [
       vscode
       zed-editor
+      modrinth-app-unwrapped
       labymod-launcher
       fastfetch
       lazydocker
@@ -155,6 +156,9 @@
       heroic
       vesktop
     ];
+  };
+  xdg.mime.defaultApplications = {
+    "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
   };
 
   programs.nix-ld.enable = true;
@@ -216,7 +220,6 @@
     apple-cursor
     quickshell
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
-    inputs.xmcl.packages."${pkgs.stdenv.hostPlatform.system}".default
     google-chrome
     yazi
     starship

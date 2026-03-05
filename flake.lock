@@ -180,28 +180,7 @@
         "home-manager": "home-manager",
         "niri": "niri",
         "nixpkgs": "nixpkgs",
-        "xmcl": "xmcl",
         "zen-browser": "zen-browser"
-      }
-    },
-    "xmcl": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1769236792,
-        "narHash": "sha256-TlX9197qae547tIhgadrsozGeoq3KmN2HLunjW69Rkg=",
-        "owner": "x45iq",
-        "repo": "xmcl-nix",
-        "rev": "eb233f62e910643bd82278acf3f7033fa1dd0f84",
-        "type": "github"
-      },
-      "original": {
-        "owner": "x45iq",
-        "repo": "xmcl-nix",
-        "type": "github"
       }
     },
     "xwayland-satellite-stable": {

@@ -34,11 +34,6 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    xmcl = {
-      url = "github:x45iq/xmcl-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, ... }: {
