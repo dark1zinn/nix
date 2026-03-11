@@ -78,7 +78,10 @@
   # Enable the KDE Plasma Desktop Environment.
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
-  programs.niri.enable = true;
+  programs.niri = {
+    enable = true;
+    # useNautilus = true;
+  };
 
   programs.dankMaterialShell = {
     enable = true;
@@ -148,6 +151,7 @@
       vscode
       zed-editor
       modrinth-app
+      prismlauncher
       labymod-launcher
       fastfetch
       lazydocker
@@ -214,6 +218,7 @@
   environment.systemPackages = with pkgs; [
     neovim
     alacritty
+    nautilus
     accountsservice
     upower
     dbus
@@ -234,6 +239,7 @@
     direnv
     nil
     nerd-fonts.caskaydia-mono
+    waywall
   ];
 
   environment.shellAliases = {
