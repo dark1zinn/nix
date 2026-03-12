@@ -152,6 +152,7 @@
       zed-editor
       modrinth-app
       prismlauncher
+      noriskclient-launcher
       labymod-launcher
       fastfetch
       lazydocker
