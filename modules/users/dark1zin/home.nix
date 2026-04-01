@@ -10,7 +10,7 @@
 
       home.sessionVariables = {
         XCURSOR_THEME = "macOS";
-        XCURSOR_SIZE = "26"; # Must be a string for environment variables
+        XCURSOR_SIZE = "26";
         XCURSOR_SUPPRESS_RANDR_SIZE = "1";
         EDITOR = "code";
       };
@@ -18,6 +18,12 @@
       home.packages = with pkgs; [
         vicinae
       ];
+
+      programs.vicinae = {
+        settings = {
+          theme.name = "vicinae-dark";
+        };
+      };
 
       home.pointerCursor = {
         enable = true;

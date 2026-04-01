@@ -80,10 +80,8 @@
     hardware.cpu.amd.updateMicrocode = true;
 
     services = {
-      hardware.openrgb.enable = true;
       flatpak.enable = true;
       udisks2.enable = true;
-      printing.enable = true;
     };
 
     security.rtkit.enable = true;

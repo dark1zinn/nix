@@ -22,7 +22,7 @@
 
     environment.systemPackages = [
       pkgs.alacritty
-      pkgs.pcmanfm
+      pkgs.nautilus
       pkgs.swayidle
       pkgs.home-manager
     ];
@@ -77,6 +77,8 @@
 
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
+      XCURSOR_SIZE = "26";
+      XCURSOR_SUPPRESS_RANDR_SIZE = "1";
     };
 
     hardware = {
