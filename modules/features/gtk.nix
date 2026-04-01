@@ -10,8 +10,8 @@
       theme-package = pkgs.tokyonight-gtk-theme.override {
         colorVariants = [ "dark" ];
         sizeVariants = [ "standard" ];
-        themeVariants = [ "purple" ];
-        tweakVariants = [ "storm" ];
+        themeVariants = [ "default" ];
+        tweakVariants = [  ];
       };
 
       icon-theme-package = pkgs.apple-cursor;

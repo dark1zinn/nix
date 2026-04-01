@@ -33,6 +33,7 @@
       zed-editor
       lazydocker
       vscode
+      jdiskreport
     ];
 
     programs.corectrl.enable = true;
@@ -109,6 +110,7 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
+    nix.settings.auto-optimise-store = true;
     boot.loader.systemd-boot.configurationLimit = 5;
 
 
