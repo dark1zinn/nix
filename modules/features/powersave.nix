@@ -8,6 +8,17 @@
     services.thermald.enable = true;
     powerManagement.powertop.enable = true;
 
+    # Disable USB autosuspend for input devices (mouse, keyboard)
+    services.udev.extraRules = ''
+      # Disable autosuspend for USB input devices
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{bInterfaceClass}=="03", ATTR{power/autosuspend}="-1"
+      # Alternative: disable for all HID devices
+      ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{../interface}=="*[Mm]ouse*", ATTR{power/control}="on"
+      ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{../interface}=="*[Kk]eyboard*", ATTR{power/control}="on"
+      ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{../product}=="*[Mm]ouse*", ATTR{power/control}="on"
+      ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{../product}=="*[Kk]eyboard*", ATTR{power/control}="on"
+    '';
+
     hardware.amdgpu.overdrive.enable = true;
     services.lact.enable = true;
 

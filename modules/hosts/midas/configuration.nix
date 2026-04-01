@@ -16,7 +16,7 @@
       self.nixosModules.git
       self.nixosModules.dms-shell
       self.nixosModules.vicinae
-      self.nixosModules.chromium
+      # self.nixosModules.chromium
 
       self.nixosModules.gaming
       self.nixosModules.powersave
@@ -49,7 +49,16 @@
       supportedFilesystems.ntfs = true;
 
       # kernelParams = ["quiet" "amd_pstate=guided" "processor.max_cstate=1"];
-      kernelParams = ["quiet"];
+      # USB stability: disable autosuspend, quirks for xHCI, disable PCIe ASPM
+      kernelParams = [
+        "quiet"
+        "usbcore.autosuspend=-1"           # Disable USB autosuspend
+        "usbcore.use_both_schemes=y"       # Use both enumeration schemes
+        "usbcore.initial_descriptor_timeout=5000"  # Increase timeout for slow devices
+        "xhci_hcd.quirks=270336"           # xHCI quirks: 0x42000 = 270336 (disable device LPM)
+        "pcie_aspm=off"                     # Disable PCIe Active State Power Management
+        "iommu=soft"                        # Use software IOMMU (helps with USB issues)
+      ];
       kernelModules = ["coretemp" "cpuid" "v4l2loopback"];
 
       binfmt.emulatedSystems = [ "aarch64-linux" ];

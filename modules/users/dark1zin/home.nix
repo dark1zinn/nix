@@ -6,15 +6,39 @@
     home-manager.users.${config.preferences.user.name} = {
       home.username = config.preferences.user.name;
       home.homeDirectory = "/home/${config.preferences.user.name}";
-      home.stateVersion = "24.11";
+      home.stateVersion = "25.11";
 
       home.sessionVariables = {
+        XCURSOR_THEME = "macOS";
+        XCURSOR_SIZE = "26"; # Must be a string for environment variables
+        XCURSOR_SUPPRESS_RANDR_SIZE = "1";
         EDITOR = "code";
       };
 
       home.packages = with pkgs; [
         vicinae
       ];
+
+      home.pointerCursor = {
+        enable = true;
+        name = "macOS";
+        package = pkgs.apple-cursor;
+        size = 26;
+
+        dotIcons.enable = true;
+        gtk.enable = true;
+        hyprcursor.enable = true;
+        sway.enable = true;
+        x11.enable = true;
+      };
+      xdg.portal = {
+        enable = true;
+        extraPortals = [
+          pkgs.xdg-desktop-portal-gtk
+          pkgs.xdg-desktop-portal-gnome
+        ]; 
+      };
+      gtk.enable = true;
     };
   };
 }
