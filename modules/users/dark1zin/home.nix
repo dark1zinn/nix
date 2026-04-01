@@ -1,16 +1,12 @@
 { inputs, self, ... }: {
-  flake.nixosModules.dark1zin = { pkgs, ... }: {
-    imports = [
-      self.nixosModules.desktop
-      self.nixosModules.vicinae
-    ];
+  flake.nixosModules.dark1zin = { pkgs, config, ... }: {
+    home-manager.useGlobalPkgs = true;
+    home-manager.useUserPackages = true;
 
-    programs.home-manager.enable = true;
-    programs.home-manager.useUserPackages = true;
-
-    programs.home-manager.users.dark1zin = {
-      home.username = "dark1zin";
-      home.homeDirectory = "/home/dark1zin";
+    home-manager.users.${config.preferences.user.name} = {
+      home.username = config.preferences.user.name;
+      home.homeDirectory = "/home/${config.preferences.user.name}";
+      home.stateVersion = "24.11";
 
       home.sessionVariables = {
         EDITOR = "code";
@@ -19,18 +15,6 @@
       home.packages = with pkgs; [
         vicinae
       ];
-
-      services.vicinae = {
-        enable = true; # default: false
-        autoStart = true; # default: true
-        settings = {
-          theme.name = "vicinae-dark";
-        };
-        systemd = {
-          enable = true;
-          autoStart = true;
-        };
-      };
     };
   };
 }

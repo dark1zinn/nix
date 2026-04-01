@@ -4,10 +4,7 @@
     lib,
     config,
     ...
-  }: let
-    inherit (lib) getExe;
-    selfpkgs = self.packages."${pkgs.stdenv.hostPlatform.system}";
-  in {
+  }: {
     imports = [
       self.nixosModules.gtk
 
@@ -16,7 +13,7 @@
     ];
 
     programs.niri.enable = true;
-    programs.niri.package = selfpkgs.niri;
+    programs.niri.package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-stable;
 
     programs.bash.shellAliases = {
       zed = "zeditor";
@@ -24,24 +21,25 @@
     };
 
     environment.systemPackages = [
-      selfpkgs.terminal
+      pkgs.alacritty
       pkgs.pcmanfm
       pkgs.swayidle
       pkgs.home-manager
     ];
 
-    systemd.user.services.swayidle = {
-      wantedBy = ["graphical-session.target"];
-      serviceConfig = {
-        ExecStart = ''${getExe pkgs.swayidle} -w \
-          timeout 300 '${getExe selfpkgs.noctalia-shell} ipc call globalIPC toggleLock' \
-          timeout 600 'hyprctl dispatch dpms off' \
-          resume 'hyprctl dispatch dpms on' \
-          before-sleep '${getExe selfpkgs.noctalia-shell} ipc call globalIPC toggleLock' \
-          lock '${getExe selfpkgs.noctalia-shell} ipc call globalIPC toggleLock' '';
-        Restart = "on-failure";
-      };
-    };
+    # TODO: Re-enable when noctalia-shell package is available
+    # systemd.user.services.swayidle = {
+    #   wantedBy = ["graphical-session.target"];
+    #   serviceConfig = {
+    #     ExecStart = ''${getExe pkgs.swayidle} -w \
+    #       timeout 300 '${getExe selfpkgs.noctalia-shell} ipc call globalIPC toggleLock' \
+    #       timeout 600 'hyprctl dispatch dpms off' \
+    #       resume 'hyprctl dispatch dpms on' \
+    #       before-sleep '${getExe selfpkgs.noctalia-shell} ipc call globalIPC toggleLock' \
+    #       lock '${getExe selfpkgs.noctalia-shell} ipc call globalIPC toggleLock' '';
+    #     Restart = "on-failure";
+    #   };
+    # };
 
     fonts.packages = with pkgs; [
       nerd-fonts.lilex

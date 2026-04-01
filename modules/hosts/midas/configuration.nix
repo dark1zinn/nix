@@ -41,9 +41,7 @@
     services.accounts-daemon.enable = true;
 
     boot = {
-      loader.grub.enable = true;
-      loader.grub.efiSupport = true;
-      loader.grub.efiInstallAsRemovable = true;
+      loader.grub.enable = false;
       loader.systemd-boot.enable = true;
       loader.efi.canTouchEfiVariables = true;
       initrd.systemd.dbus.enable = true;
@@ -102,9 +100,6 @@
     networking.firewall.enable = false;
     programs.appimage.enable = true;
     programs.appimage.binfmt = true;
-
-    programs.home-manager.enable = true;
-    programs.home-manager.useUserPackages = true;
 
     services.xserver.videoDrivers = ["amdgpu"];
     boot.initrd.kernelModules = ["amdgpu"];

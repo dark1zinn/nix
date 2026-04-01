@@ -13,7 +13,7 @@
       isNormalUser = true;
       description = "${config.preferences.user.name}'s account";
       extraGroups = ["wheel" "networkmanager"];
-      shell = self.packages.${pkgs.system}.environment;
+      shell = pkgs.bash;
 
       # hashedPasswordFile = "/persist/passwd";
       # initialPassword = "12345";
