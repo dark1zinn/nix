@@ -1,0 +1,135 @@
+{
+  inputs,
+  self,
+  ...
+}: {
+  flake.nixosModules.MIDAS = {pkgs, ...}: {
+    imports = [
+      self.nixosModules.base
+      self.nixosModules.general
+      self.nixosModules.desktop
+
+      inputs.home-manager.nixosModules.home-manager
+
+      self.nixosModules.discord
+      self.nixosModules.starship
+      self.nixosModules.git
+      self.nixosModules.dms-shell
+      self.nixosModules.vicinae
+      self.nixosModules.chromium
+
+      self.nixosModules.gaming
+      self.nixosModules.powersave
+    ];
+
+    environment.systemPackages = with pkgs; [
+      btop
+      alacritty
+      neovim
+      obsidian
+      yazi
+      fastfetch
+      spotify
+      zed-editor
+      lazydocker
+      vscode
+    ];
+
+    programs.corectrl.enable = true;
+
+    services.upower.enable = true;
+    services.accounts-daemon.enable = true;
+
+    boot = {
+      loader.grub.enable = true;
+      loader.grub.efiSupport = true;
+      loader.grub.efiInstallAsRemovable = true;
+      loader.systemd-boot.enable = true;
+      loader.efi.canTouchEfiVariables = true;
+      initrd.systemd.dbus.enable = true;
+
+      supportedFilesystems.ntfs = true;
+
+      # kernelParams = ["quiet" "amd_pstate=guided" "processor.max_cstate=1"];
+      kernelParams = ["quiet"];
+      kernelModules = ["coretemp" "cpuid" "v4l2loopback"];
+
+      binfmt.emulatedSystems = [ "aarch64-linux" ];
+    };
+
+    boot.plymouth.enable = true;
+
+    networking = {
+      hostName = "midas";
+      networkmanager.enable = true;
+      wireless.enable = true;
+    };
+
+    virtualisation.libvirtd.enable = true;
+    virtualisation.docker = {
+      enable = true;
+    };
+
+    hardware.cpu.amd.updateMicrocode = true;
+
+    services = {
+      hardware.openrgb.enable = true;
+      flatpak.enable = true;
+      udisks2.enable = true;
+      printing.enable = true;
+    };
+
+    security.rtkit.enable = true;
+
+    xdg.portal.extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gnome
+    ];
+    xdg.portal.enable = true;
+
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        mesa
+        vulkan-tools
+      ];
+    };
+
+    programs.niri.enable = true;
+
+    networking.firewall.enable = false;
+    programs.appimage.enable = true;
+    programs.appimage.binfmt = true;
+
+    programs.home-manager.enable = true;
+    programs.home-manager.useUserPackages = true;
+
+    services.xserver.videoDrivers = ["amdgpu"];
+    boot.initrd.kernelModules = ["amdgpu"];
+
+    programs.obs-studio = {
+      enable = true;
+      # plugins = with pkgs.obs-studio-plugins; [
+      #   obs-move-transition
+      # ];
+    };
+
+    # persistance.cache.directories = [
+    #   ".config/obs-studio"
+    # ];
+
+    # programs._1password.enable = true;
+    # programs._1password-gui.enable = true;
+
+    # persistance.data.directories = [
+    #   ".config/1password"
+    #   ".config/1Passoword"
+    # ];
+
+    security.sudo.wheelNeedsPassword = true;
+
+    system.stateVersion = "25.05";
+  };
+}
