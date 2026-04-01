@@ -97,6 +97,14 @@
 
     programs.niri.enable = true;
 
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+    boot.loader.systemd-boot.configurationLimit = 5;
+
+
     networking.firewall.enable = false;
     programs.appimage.enable = true;
     programs.appimage.binfmt = true;

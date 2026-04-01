@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-  flake.nixosModules.vicinae = {
+{ ... }: {
+  flake.nixosModules.vicinae = { pkgs, ... }: {
     environment.systemPackages = [
       pkgs.vicinae
     ];
