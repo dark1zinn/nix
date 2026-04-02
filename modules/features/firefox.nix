@@ -2,7 +2,9 @@
   flake.nixosModules.firefox = {pkgs, ...}: {
     # programs.firefox.enable = true;
 
-    environment.systemPackages = [inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".twilight];
+    environment.systemPackages = [
+      inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
+    ];
 
     # persistance.data.directories = [
     #   ".mozilla"
