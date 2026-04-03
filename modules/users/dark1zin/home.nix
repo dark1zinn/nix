@@ -65,6 +65,11 @@
         sway.enable = true;
         x11.enable = true;
       };
+
+      home.file = {
+        ".icons/default".source = "${pkgs.apple-cursor}/share/icons/default";
+      };
+
       xdg.portal = {
         enable = true;
         extraPortals = [

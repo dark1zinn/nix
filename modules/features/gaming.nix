@@ -16,6 +16,7 @@
         ];
         extraPackages = with pkgs; [
           SDL2
+          apple-cursor
         ];
         protontricks.enable = true;
       };
