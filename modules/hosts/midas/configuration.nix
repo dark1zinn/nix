@@ -26,14 +26,8 @@
       btop
       alacritty
       neovim
-      obsidian
-      yazi
-      fastfetch
-      spotify
-      zed-editor
-      lazydocker
-      vscode
-      jdiskreport
+
+      xwayland-satellite
     ];
 
     programs.corectrl.enable = true;

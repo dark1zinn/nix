@@ -20,11 +20,13 @@
       buildnix = "sudo nixos-rebuild switch --flake ~/nixos/#midas";
     };
 
-    environment.systemPackages = [
-      pkgs.alacritty
-      pkgs.nautilus
-      pkgs.swayidle
-      pkgs.home-manager
+    environment.systemPackages = with pkgs; [
+      alacritty
+      pcmanfm
+      swayidle
+      home-manager
+      xwayland
+      xwayland-satellite
     ];
 
     # TODO: Re-enable when noctalia-shell package is available
@@ -46,7 +48,7 @@
       nerd-fonts.caskaydia-mono
     ];
 
-    services.automatic-timezoned.enable = true;
+    time.timeZone = "America/Bahia";
     i18n.defaultLocale = "en_US.UTF-8";
     i18n.extraLocaleSettings = {
       LC_ADDRESS = "pt_BR.UTF-8";

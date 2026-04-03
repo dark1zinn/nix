@@ -37,6 +37,14 @@
 
       home.packages = with pkgs; [
         vicinae
+        obsidian
+        yazi
+        fastfetch
+        spotify
+        zed-editor
+        lazydocker
+        vscode
+        pcmanfm
       ];
 
       programs.vicinae = {
