@@ -38,13 +38,16 @@
       home.packages = with pkgs; [
         vicinae
         obsidian
-        yazi
-        fastfetch
         spotify
         zed-editor
-        lazydocker
         vscode
         pcmanfm
+
+        # Not directly a "program"
+        linux-wallpaperengine
+        yazi
+        lazydocker
+        fastfetch
       ];
 
       programs.vicinae = {
@@ -66,9 +69,9 @@
         x11.enable = true;
       };
 
-      home.file = {
-        ".icons/default".source = "${pkgs.apple-cursor}/share/icons/default";
-      };
+      # home.file = {
+      #   ".icons/default".source = "${pkgs.apple-cursor}/share/icons/default";
+      # };
 
       xdg.portal = {
         enable = true;

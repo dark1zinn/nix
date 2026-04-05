@@ -16,7 +16,7 @@
       self.nixosModules.git
       self.nixosModules.dms-shell
       self.nixosModules.vicinae
-      # self.nixosModules.chromium
+      self.nixosModules.chromium
 
       self.nixosModules.gaming
       self.nixosModules.powersave
