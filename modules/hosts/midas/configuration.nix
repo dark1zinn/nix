@@ -8,6 +8,7 @@
       self.nixosModules.base
       self.nixosModules.general
       self.nixosModules.desktop
+      self.nixosModules.nix
 
       inputs.home-manager.nixosModules.home-manager
 
