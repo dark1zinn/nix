@@ -10,6 +10,7 @@
       ./_/locale.nix
       ./_/fonts.nix
       ./_/session.nix
+      ./_/dbus.nix
     ];
   };
 }

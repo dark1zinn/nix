@@ -21,6 +21,15 @@ modules/
 sudo nixos-rebuild switch --flake ~/nixos/#midas
 ```
 
+If the switch is blocked by a **dbus-implementation** inhibitor (`dbus -> broker`), the running system still uses classic D-Bus while the new config uses [dbus-broker](https://github.com/bus1/dbus-broker) (now the nixpkgs default). That migration is unsafe to apply live — use boot + reboot instead:
+
+```bash
+sudo nixos-rebuild boot --flake ~/nixos/#midas
+sudo reboot
+```
+
+Do **not** bypass this with `NIXOS_NO_CHECK=1`; restarting D-Bus mid-session can crash services or leave IPC broken.
+
 ## Plug / unplug
 
 **Host features** — edit `modules/hosts/midas/host.nix`:
