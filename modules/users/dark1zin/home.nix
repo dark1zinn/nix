@@ -1,5 +1,5 @@
-{ inputs, self, ... }: {
-  flake.nixosModules.dark1zin = { pkgs, config, ... }: {
+{ inputs, ... }: {
+  flake.nixosModules.dark1zin-home = { pkgs, config, ... }: {
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
 
@@ -7,8 +7,7 @@
       home.username = config.preferences.user.name;
       home.homeDirectory = "/home/${config.preferences.user.name}";
       home.stateVersion = "25.11";
-      
-      # Backup existing config files before home-manager takes over
+
       home.activation.backupExistingConfigs = inputs.home-manager.lib.hm.dag.entryBefore ["writeBoundary"] ''
         backup_dir="$HOME/.config-backup-$(date +%Y%m%d-%H%M%S)"
         files_to_backup=(
@@ -18,7 +17,7 @@
           "$HOME/.config/gtk-3.0/settings.ini"
           "$HOME/.gtkrc-2.0"
         )
-        
+
         for file in "''${files_to_backup[@]}"; do
           if [[ -f "$file" && ! -L "$file" ]]; then
             $DRY_RUN_CMD mkdir -p "$backup_dir/$(dirname "''${file#$HOME/}")"
@@ -36,42 +35,29 @@
       };
 
       home.packages = with pkgs; [
-        vicinae
         obsidian
         spotify
         zed-editor
         vscode
+        code-cursor
         pcmanfm
-
-        # Not directly a "program"
         linux-wallpaperengine
         yazi
         lazydocker
         fastfetch
       ];
 
-      programs.vicinae = {
-        settings = {
-          theme.name = "vicinae-dark";
-        };
-      };
-
       home.pointerCursor = {
         enable = true;
         name = "macOS";
         package = pkgs.apple-cursor;
         size = 26;
-
         dotIcons.enable = true;
         gtk.enable = true;
         hyprcursor.enable = true;
         sway.enable = true;
         x11.enable = true;
       };
-
-      # home.file = {
-      #   ".icons/default".source = "${pkgs.apple-cursor}/share/icons/default";
-      # };
 
       xdg.portal = {
         enable = true;
@@ -81,36 +67,7 @@
         ];
         config.common.default = "*";
       };
-      
-      # GTK configuration
-      gtk = {
-        enable = true;
-        
-        theme = {
-          name = "Tokyonight";
-          package = pkgs.tokyonight-gtk-theme.override {
-            colorVariants = [ "dark" ];
-            sizeVariants = [ "standard" ];
-            themeVariants = [ "default" ];
-            tweakVariants = [ ];
-          };
-        };
-        
-        iconTheme = {
-          name = "macOS";
-          package = pkgs.apple-cursor;
-        };
-        
-        gtk3.extraConfig = {
-          gtk-application-prefer-dark-theme = true;
-        };
-        
-        gtk4.extraConfig = {
-          gtk-application-prefer-dark-theme = true;
-        };
-      };
-      
-      # Configure Xresources
+
       xresources.properties = {
         "Xcursor.theme" = "macOS";
         "Xcursor.size" = 26;

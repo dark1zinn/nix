@@ -4,10 +4,10 @@
   ...
 }: {
   flake.nixosConfigurations.midas = inputs.nixpkgs.lib.nixosSystem {
+    specialArgs = {inherit inputs self;};
     modules = [
-      self.nixosModules.MIDAS
-      self.nixosModules.midasHardware
-
+      self.nixosModules.midas
+      self.nixosModules.midas-hardware
       self.nixosModules.dark1zin
     ];
   };

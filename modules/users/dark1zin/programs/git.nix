@@ -1,5 +1,5 @@
-{ ... }: {
-  flake.nixosModules.git = {
+{...}: {
+  flake.nixosModules.dark1zin-git = {
     programs.git = {
       enable = true;
       config = {
@@ -10,5 +10,5 @@
         };
       };
     };
-  }; 
+  };
 }

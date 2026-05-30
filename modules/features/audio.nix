@@ -1,16 +1,7 @@
-{
-  flake.nixosModules.pipewire = {pkgs, ...}: {
-    # preferences.keymap = {
-    #   "SUPER + v".exec = ''${pkgs.alsa-utils}/bin/amixer sset Capture toggle'';
-    #   "SUPER + d"."s".package = pkgs.pwvucontrol;
-    # };
-
-
-    # persistance.cache.directories = [
-    #   ".local/state/wireplumber"
-    # ];
-
+{...}: {
+  flake.nixosModules.audio = {pkgs, ...}: {
     security.rtkit.enable = true;
+
     services.pipewire = {
       enable = true;
       alsa.enable = true;
@@ -19,7 +10,6 @@
       jack.enable = true;
 
       extraConfig = {
-        # https://discourse.nixos.org/t/pipewire-rnnoise-module-wont-work/58975/12
         pipewire."99-input-denoising" = {
           "context.modules" = [
             {

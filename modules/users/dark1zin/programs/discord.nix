@@ -1,8 +1,8 @@
-{
-  flake.nixosModules.discord = {pkgs, ...}: {
+{...}: {
+  flake.nixosModules.dark1zin-discord = {pkgs, ...}: {
     nixpkgs.overlays = [
       (final: prev: {
-        vesktop = prev.vesktop.overrideAttrs (old: {
+        vesktop = prev.vesktop.overrideAttrs (_: {
           preBuild = ''
             cp -r ${prev.electron.dist} electron-dist
             chmod -R u+w electron-dist
@@ -25,14 +25,7 @@
 
     environment.systemPackages = [
       pkgs.vesktop
-      (pkgs.discord.override {
-        withVencord = true;
-      })
+      (pkgs.discord.override {withVencord = true;})
     ];
-
-    # persistance.cache.directories = [
-    #   ".config/vesktop"
-    #   ".config/discord"
-    # ];
   };
 }
