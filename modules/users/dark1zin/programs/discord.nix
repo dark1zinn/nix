@@ -1,5 +1,18 @@
 {...}: {
-  flake.nixosModules.dark1zin-discord = {pkgs, ...}: {
+  flake.nixosModules.dark1zin-discord = {pkgs, ...}: let
+    # PipeWire capturer is required for Wayland screen sharing in Electron apps.
+    pipewireCapturerFlags = "--enable-features=WebRTCPipeWireCapturer";
+
+    wrapElectronApp = pkg:
+      pkgs.symlinkJoin {
+        inherit (pkg) name meta;
+        paths = [pkg];
+        nativeBuildInputs = [pkgs.makeWrapper];
+        postBuild = ''
+          wrapProgram $out/bin/${pkg.pname} --add-flags "${pipewireCapturerFlags}"
+        '';
+      };
+  in {
     nixpkgs.overlays = [
       (final: prev: {
         vesktop = prev.vesktop.overrideAttrs (_: {
@@ -24,8 +37,8 @@
     ];
 
     environment.systemPackages = [
-      pkgs.vesktop
-      (pkgs.discord.override {withVencord = true;})
+      (wrapElectronApp pkgs.vesktop)
+      (wrapElectronApp (pkgs.discord.override {withVencord = true;}))
     ];
   };
 }
