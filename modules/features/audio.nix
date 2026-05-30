@@ -2,18 +2,25 @@
   flake.nixosModules.audio = {pkgs, ...}: {
     security.rtkit.enable = true;
 
+    services.pulseaudio.enable = false;
+
     services.pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
+      wireplumber.enable = true;
+
+      # PipeWire 1.6+ resolves LADSPA plugins by name via LADSPA_PATH, not full paths.
+      extraLadspaPackages = [pkgs.rnnoise-plugin];
 
       extraConfig = {
         pipewire."99-input-denoising" = {
           "context.modules" = [
             {
               name = "libpipewire-module-filter-chain";
+              flags = ["nofail"];
               args = {
                 "node.description" = "Noise Canceling source";
                 "media.name" = "Noise Canceling source";
@@ -22,7 +29,7 @@
                     {
                       type = "ladspa";
                       name = "rnnoise";
-                      plugin = "${pkgs.rnnoise-plugin}/lib/ladspa/librnnoise_ladspa.so";
+                      plugin = "librnnoise_ladspa";
                       label = "noise_suppressor_mono";
                       control = {
                         "VAD Threshold (%)" = 50.0;
