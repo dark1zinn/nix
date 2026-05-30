@@ -57,6 +57,10 @@
           name = theme-name;
           package = theme-package;
         };
+        gtk4.theme = {
+          name = theme-name;
+          package = theme-package;
+        };
         iconTheme = {
           name = icon-theme-name;
           package = pkgs.apple-cursor;

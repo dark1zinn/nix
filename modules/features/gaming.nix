@@ -12,7 +12,6 @@
     };
 
     environment.systemPackages = with pkgs; [
-      steam-run
       dxvk
       mangohud
       heroic
