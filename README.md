@@ -2,6 +2,8 @@
 
 Personal NixOS flake using [flake-parts](https://flake.parts) and [import-tree](https://github.com/vic/import-tree).
 
+**Documentation:** [docs/](./docs/) — structure overview, new host setup, new user setup.
+
 ## Layout
 
 ```
