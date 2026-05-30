@@ -2,6 +2,7 @@
   flake.nixosModules.dark1zin-home = { pkgs, config, ... }: {
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
+    home-manager.backupFileExtension = "hm-bak";
 
     home-manager.users.${config.preferences.user.name} = {
       home.username = config.preferences.user.name;
@@ -14,7 +15,15 @@
           "$HOME/.Xresources"
           "$HOME/.local/share/icons/default/index.theme"
           "$HOME/.config/gtk-4.0/settings.ini"
+          "$HOME/.config/gtk-4.0/gtk.css"
+          "$HOME/.config/gtk-4.0/colors.css"
+          "$HOME/.config/gtk-4.0/dank-colors.css"
+          "$HOME/.config/gtk-4.0/window_decorations.css"
           "$HOME/.config/gtk-3.0/settings.ini"
+          "$HOME/.config/gtk-3.0/gtk.css"
+          "$HOME/.config/gtk-3.0/colors.css"
+          "$HOME/.config/gtk-3.0/dank-colors.css"
+          "$HOME/.config/gtk-3.0/window_decorations.css"
           "$HOME/.gtkrc-2.0"
         )
 
