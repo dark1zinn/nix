@@ -46,14 +46,14 @@
       home.packages = with pkgs; [
         obsidian
         spotify
-        zed-editor
         vscode
         code-cursor
         pcmanfm
-        linux-wallpaperengine
         yazi
         lazydocker
         fastfetch
+        labymod-launcher
+        modrinth-app
       ];
 
       home.pointerCursor = {

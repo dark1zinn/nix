@@ -13,10 +13,6 @@
 
     environment.systemPackages = with pkgs; [
       dxvk
-      mangohud
-      heroic
-      labymod-launcher
-      modrinth-app
     ];
 
     services.zerotierone.enable = true;
