@@ -48,12 +48,12 @@
         spotify
         vscode
         code-cursor
-        pcmanfm
         yazi
         lazydocker
         fastfetch
         labymod-launcher
         modrinth-app
+	kdePackages.dolphin
       ];
 
       home.pointerCursor = {
