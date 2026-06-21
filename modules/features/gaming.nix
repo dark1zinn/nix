@@ -15,6 +15,8 @@
       dxvk
     ];
 
+    powerManagement.cpuFreqGovernor = "performance";
+
     services.zerotierone.enable = true;
   };
 }
