@@ -10,7 +10,7 @@
       self.nixosModules.dark1zin-gtk
       self.nixosModules.dark1zin-vicinae
       self.nixosModules.dark1zin-zen-browser
-      self.nixosModules.dark1zin-chromium
+      self.nixosModules.dark1zin-helium
       self.nixosModules.dark1zin-discord
       self.nixosModules.dark1zin-niri
       self.nixosModules.dark1zin-dms-shell
