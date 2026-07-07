@@ -40,7 +40,7 @@
         XCURSOR_THEME = "macOS";
         XCURSOR_SIZE = "26";
         XCURSOR_SUPPRESS_RANDR_SIZE = "1";
-        EDITOR = "code";
+        EDITOR = "hx";
       };
 
       xdg.configFile."nixpkgs/config.nix".text = ''
@@ -53,11 +53,13 @@
         vscode
         code-cursor
         yazi
+        helix
+        gh
+        tmux
         lazydocker
         fastfetch
         labymod-launcher
-        modrinth-app
-	kdePackages.dolphin
+       	kdePackages.dolphin
       ];
 
       home.pointerCursor = {
