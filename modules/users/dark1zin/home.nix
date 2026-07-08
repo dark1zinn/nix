@@ -49,14 +49,13 @@
 
       home.packages = with pkgs; [
         obsidian
-        spotify
         vscode
-        code-cursor
         yazi
         helix
         gh
         tmux
         lazydocker
+        lazygit
         fastfetch
         labymod-launcher
        	kdePackages.dolphin
