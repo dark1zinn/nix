@@ -6,7 +6,7 @@
         init.defaultBranch = "main";
         user = {
           name = "dark1zinn";
-          email = "edilsonjuininho154@gmail.com";
+          email = "dark1zinn00@gmail.com";
         };
       };
     };
