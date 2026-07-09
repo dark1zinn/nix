@@ -15,6 +15,7 @@
 
     programs.bash.shellAliases = {
       buildnix = "sudo nixos-rebuild switch --flake ~/nixos#midas";
+      lg = "lazygit";
     };
 
     home-manager.users.${config.preferences.user.name} = {
