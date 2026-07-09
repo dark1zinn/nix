@@ -4,6 +4,19 @@
     home-manager.useUserPackages = true;
     home-manager.backupFileExtension = "hm-bak";
 
+    environment.variables = {
+      EDITOR = "hx";
+      VISUAL = "hx";
+      XCURSOR_THEME = "macOS";
+      XCURSOR_SIZE = "24";
+      XCURSOR_SUPPRESS_RANDR_SIZE = "1";
+      TERMINAL = "alacritty";
+    };
+
+    programs.bash.shellAliases = {
+      buildnix = "sudo nixos-rebuild switch --flake ~/nixos#midas";
+    };
+
     home-manager.users.${config.preferences.user.name} = {
       home.username = config.preferences.user.name;
       home.homeDirectory = "/home/${config.preferences.user.name}";
@@ -36,13 +49,6 @@
         done
       '';
 
-      home.sessionVariables = {
-        XCURSOR_THEME = "macOS";
-        XCURSOR_SIZE = "26";
-        XCURSOR_SUPPRESS_RANDR_SIZE = "1";
-        EDITOR = "hx";
-      };
-
       xdg.configFile."nixpkgs/config.nix".text = ''
         { allowUnfree = true; }
       '';
@@ -52,6 +58,8 @@
         vscode
         yazi
         helix
+        alacritty
+        ghostty
         gh
         tmux
         lazydocker

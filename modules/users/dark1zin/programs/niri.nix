@@ -6,14 +6,7 @@
     programs.niri.enable = true;
     programs.niri.package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-stable;
 
-    programs.bash.shellAliases = {
-      zed = "zeditor";
-      buildnix = "sudo nixos-rebuild switch --flake ~/nixos/#midas";
-    };
-
     environment.systemPackages = with pkgs; [
-      alacritty
-      pcmanfm
       swayidle
     ];
 
