@@ -16,7 +16,6 @@ Copy the relevant parts (fileSystems, boot modules, platform) into your hardware
 
 ```text
 modules/hosts/athena/
-├── default.nix
 ├── host.nix
 └── hardware.nix
 ```
@@ -81,26 +80,23 @@ Export the host module. Import `base` and whichever features apply:
 }
 ```
 
-### `default.nix`
+## 3. Plug into the User Configuration
 
-Register the flake output and attach users:
+Enable the host modules in your user configuration (e.g. `modules/users/dark1zin/default.nix`):
 
 ```nix
-{ inputs, self, ... }: {
-  flake.nixosConfigurations.athena = inputs.nixpkgs.lib.nixosSystem {
-    specialArgs = { inherit inputs self; };
-    modules = [
-      self.nixosModules.athena
-      self.nixosModules.athena-hardware
-      self.nixosModules.dark1zin   # or another user module
-    ];
-  };
-}
+imports = [
+  # Target host
+  self.nixosModules.athena
+  self.nixosModules.athena-hardware
+
+  # Programs
+  self.nixosModules.dark1zin-git
+  # ...
+];
 ```
 
-`specialArgs` is required so `base` modules (e.g. `nix.nix`) can access flake `inputs`.
-
-## 3. Track the files in git
+## 4. Track the files in git
 
 Nix flakes only see **tracked** files. After creating the modules:
 
@@ -108,25 +104,24 @@ Nix flakes only see **tracked** files. After creating the modules:
 git add modules/hosts/athena/
 ```
 
-## 4. Validate and switch
+## 5. Validate and switch
 
 ```bash
 nix flake check
-sudo nixos-rebuild switch --flake ~/nixos/#athena
+sudo nixos-rebuild switch --flake ~/nixos/#dark1zin
 ```
 
 ## Checklist
 
 - [ ] `hardware.nix` — correct disk UUIDs and platform
 - [ ] `host.nix` — hostname, stateVersion, feature imports
-- [ ] `default.nix` — `nixosConfigurations.<name>` with `specialArgs`
+- [ ] Host modules imported in the user's `default.nix`
 - [ ] GPU feature matches hardware (`amd`, or create `intel`/`nvidia` feature)
-- [ ] User module referenced in `default.nix`
 - [ ] Files committed to git
 - [ ] `nix flake check` passes
 
 ## Tips
 
 - Start with a minimal feature set and add modules one at a time.
-- Copy `modules/hosts/midas/` as a template and trim what you don't need.
+- Copy files from `modules/hosts/midas/` as a template and trim what you don't need.
 - Keep vendor-specific settings (AMD, USB quirks, etc.) in features or hardware — not in `base`.

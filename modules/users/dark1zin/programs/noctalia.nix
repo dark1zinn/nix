@@ -10,7 +10,7 @@
     ];
 
     programs.bash.shellAliases = {
-      buildnix = "sudo nixos-rebuild switch --flake ~/nixos/#midas";
+      buildnix = "sudo nixos-rebuild switch --flake ~/nixos/#dark1zin";
     };
 
     # programs.noctalia.enable = true;

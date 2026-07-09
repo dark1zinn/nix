@@ -8,7 +8,7 @@
 
     programs.bash.shellAliases = {
       zed = "zeditor";
-      buildnix = "sudo nixos-rebuild switch --flake ~/nixos/#midas";
+      buildnix = "sudo nixos-rebuild switch --flake ~/nixos/#dark1zin";
     };
 
     environment.systemPackages = with pkgs; [

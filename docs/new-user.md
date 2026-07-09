@@ -1,12 +1,12 @@
 # Adding a new user
 
-This guide walks through adding a user named `alice` to the flake. The user module handles Home Manager and personal program configs.
+This guide walks through adding a user named `alice` to the flake. The user module handles Home Manager, personal program configs, and system-level host integration.
 
 ## 1. Create the user directory
 
 ```text
 modules/users/alice/
-├── default.nix       # entry point — imports home + programs
+├── default.nix       # entry point — defines nixosSystem + imports home/programs/hosts
 ├── home.nix          # Home Manager core (packages, session, cursor)
 ├── programs/         # one file per app/tool
 │   ├── git.nix
@@ -53,14 +53,25 @@ The account itself (groups, shell) is created in `base/_/account.nix`.
 
 ## 3. User entry — `default.nix`
 
-Wire Home Manager and pick programs:
+Define the NixOS system configuration output and pick your programs and hosts:
 
 ```nix
 { inputs, self, ... }: {
+  flake.nixosConfigurations.alice = inputs.nixpkgs.lib.nixosSystem {
+    specialArgs = { inherit inputs self; };
+    modules = [
+      self.nixosModules.alice
+    ];
+  };
+
   flake.nixosModules.alice = { config, ... }: {
     imports = [
       inputs.home-manager.nixosModules.home-manager
       self.nixosModules.alice-home
+
+      # Target Hosts — comment/uncomment to target a host
+      self.nixosModules.athena
+      self.nixosModules.athena-hardware
 
       # Programs — comment/uncomment to plug/unplug
       self.nixosModules.alice-git
@@ -105,19 +116,16 @@ For programs that need both system and Home Manager config (e.g. GTK, Vicinae), 
 
 Naming convention: `flake.nixosModules.<user>-<program>`.
 
-## 5. Attach the user to a host
+## 5. Attach a host to the user
 
-In the host's `default.nix`, add the user module:
+Instead of the host specifying the user, the user targets the host. You do this by importing the host's modules under your user entry module inside `default.nix` as shown in Section 3:
 
 ```nix
-flake.nixosConfigurations.athena = inputs.nixpkgs.lib.nixosSystem {
-  specialArgs = { inherit inputs self; };
-  modules = [
-    self.nixosModules.athena
-    self.nixosModules.athena-hardware
-    self.nixosModules.alice          # add here
-  ];
-};
+imports = [
+  self.nixosModules.athena
+  self.nixosModules.athena-hardware
+  # ...
+];
 ```
 
 If the username differs from the default in `base/_/user.nix`, set it in `host.nix`:
@@ -131,15 +139,15 @@ preferences.user.name = "alice";
 ```bash
 git add modules/users/alice/
 nix flake check
-sudo nixos-rebuild switch --flake ~/nixos/#<host>
+sudo nixos-rebuild switch --flake ~/nixos/#alice
 ```
 
 ## Checklist
 
 - [ ] `home.nix` exports `nixosModules.<user>-home`
-- [ ] `default.nix` exports `nixosModules.<user>` and imports programs
+- [ ] `default.nix` exports `nixosModules.<user>` and `nixosConfigurations.<user>`
+- [ ] Host modules imported in user's `default.nix`
 - [ ] Each program exports `nixosModules.<user>-<program>`
-- [ ] User module referenced in host `default.nix`
 - [ ] `preferences.user.name` matches the actual username
 - [ ] Files committed to git
 - [ ] `nix flake check` passes
