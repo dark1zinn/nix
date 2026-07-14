@@ -6,6 +6,7 @@
 
       # Programs — comment/uncomment to plug/unplug
       self.nixosModules.dark1zin-git
+      self.nixosModules.dark1zin-kitty
       self.nixosModules.dark1zin-starship
       self.nixosModules.dark1zin-gtk
       self.nixosModules.dark1zin-vicinae

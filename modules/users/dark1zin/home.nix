@@ -60,7 +60,6 @@
         yazi
         helix
         alacritty
-        ghostty
         gh
         tmux
         lazydocker
