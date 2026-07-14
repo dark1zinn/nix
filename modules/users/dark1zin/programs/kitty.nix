@@ -14,6 +14,15 @@
           package = pkgs.nerd-fonts.lilex;
           name = "Lilex Nerd Font";
         };
+        settings = {
+          font_features = "none";
+        };
+      };
+
+      home.file = {
+        ".config/xdg-terminals.list".text = "
+           Kitty.desktop
+        ";
       };
     };
   };

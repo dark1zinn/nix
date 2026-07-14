@@ -12,7 +12,7 @@
     };
 
     programs.bash.shellAliases = {
-      # This 'buidlnix' is a poor alias since it constraints its exectution fore a specific folder and host
+      # This 'buidlnix' is a poor alias since it constraints its exectution for a specific folder and host
       # Must be improved later
       buildnix = "sudo nixos-rebuild switch --flake ~/nixos#midas";
       lg = "lazygit";
