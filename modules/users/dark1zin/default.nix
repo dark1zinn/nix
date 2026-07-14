@@ -1,5 +1,9 @@
-{ inputs, self, ... }: {
-  flake.nixosModules.dark1zin = { config, ... }: {
+{
+  inputs,
+  self,
+  ...
+}: {
+  flake.nixosModules.dark1zin = {config, ...}: {
     imports = [
       inputs.home-manager.nixosModules.home-manager
       self.nixosModules.dark1zin-home

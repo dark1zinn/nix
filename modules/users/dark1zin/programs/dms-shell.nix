@@ -1,8 +1,5 @@
 {...}: {
-  flake.nixosModules.dark1zin-dms-shell = {
-    config,
-    ...
-  }: {
+  flake.nixosModules.dark1zin-dms-shell = {config, ...}: {
     programs.dms-shell = {
       enable = true;
       systemd = {

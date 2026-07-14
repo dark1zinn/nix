@@ -1,5 +1,9 @@
-{ inputs, ... }: {
-  flake.nixosModules.dark1zin-home = { pkgs, config, ... }: {
+{inputs, ...}: {
+  flake.nixosModules.dark1zin-home = {
+    pkgs,
+    config,
+    ...
+  }: {
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
     home-manager.backupFileExtension = "hm-bak";
@@ -66,7 +70,7 @@
         lazygit
         fastfetch
         labymod-launcher
-       	kdePackages.dolphin
+        kdePackages.dolphin
       ];
 
       home.pointerCursor = {

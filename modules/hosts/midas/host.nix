@@ -22,7 +22,7 @@
       btop
       alacritty
       helix
-      libsecret  # For secret management in keyring
+      libsecret # For secret management in keyring
     ];
 
     programs.corectrl.enable = true;
