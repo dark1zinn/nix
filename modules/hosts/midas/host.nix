@@ -21,7 +21,8 @@
     environment.systemPackages = with pkgs; [
       btop
       alacritty
-      neovim
+      helix
+      libsecret  # For secret management in keyring
     ];
 
     programs.corectrl.enable = true;
