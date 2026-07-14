@@ -5,15 +5,15 @@
     home-manager.backupFileExtension = "hm-bak";
 
     environment.variables = {
-      EDITOR = "hx";
-      VISUAL = "hx";
       XCURSOR_THEME = "macOS";
       XCURSOR_SIZE = "24";
       XCURSOR_SUPPRESS_RANDR_SIZE = "1";
-      TERMINAL = "alacritty";
+      TERMINAL = "kitty";
     };
 
     programs.bash.shellAliases = {
+      # This 'buidlnix' is a poor alias since it constraints its exectution fore a specific folder and host
+      # Must be improved later
       buildnix = "sudo nixos-rebuild switch --flake ~/nixos#midas";
       lg = "lazygit";
     };
@@ -56,9 +56,7 @@
 
       home.packages = with pkgs; [
         obsidian
-        vscode
         yazi
-        helix
         alacritty
         gh
         tmux
