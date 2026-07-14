@@ -1,0 +1,20 @@
+theme = "github_dark_high_contrast"
+
+[editor]
+line-number = "relative"
+end-of-line-diagnostics = "hint"
+
+[editor.auto-save]
+focus-lost = true
+after-delay.enable = true
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+
+[editor.indent-guides]
+render = true
+skip-levels = 1

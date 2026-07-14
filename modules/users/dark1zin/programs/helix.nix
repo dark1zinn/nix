@@ -11,6 +11,12 @@
         enable = true;
         defaultEditor = true;
       };
+
+      home.file.".config/helix" = {
+        source = ../assets/helix;
+        force = true;
+        recursive = true;
+      };
     };
   };
 }

@@ -1,0 +1,24 @@
+# [language-server.typescript-go]
+# command = "tsc"
+# args = ["--lsp", "--stdio"]
+
+# Beta tsgo beta binary typescript lsp
+[language-server.typescript-go]
+command = "tsgo"
+args = ["--lsp", "--stdio"]
+
+[[language]]
+name = "typescript"
+language-servers = ["typescript-go"]
+
+[[language]]
+name = "tsx"
+language-servers = ["typescript-go"]
+
+[[language]]
+name = "javascript"
+language-servers = ["typescript-go"]
+
+[[language]]
+name = "jsx"
+language-servers = ["typescript-go"]
