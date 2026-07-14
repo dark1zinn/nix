@@ -8,7 +8,7 @@
 
     home-manager.users.${config.preferences.user.name} = {
       programs.vicinae.settings = {
-        theme.name = "vicinae-dark";
+        theme.name = "catppuccin-mocha";
       };
     };
   };

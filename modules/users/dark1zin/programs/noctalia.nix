@@ -3,17 +3,6 @@
 # then enable this module.
 {...}: {
   flake.nixosModules.dark1zin-noctalia = {pkgs, ...}: {
-    environment.systemPackages = with pkgs; [
-      alacritty
-      pcmanfm
-      swayidle
-    ];
-
-    programs.bash.shellAliases = {
-      buildnix = "sudo nixos-rebuild switch --flake ~/nixos/#midas";
-    };
-
-    # programs.noctalia.enable = true;
-    # programs.noctalia.package = ...;
+    # Noctalia configuration...
   };
 }
