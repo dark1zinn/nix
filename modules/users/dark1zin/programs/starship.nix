@@ -9,8 +9,8 @@
           settings = {
             character = {
               format = "$symbol ";
-              success_symbol = "[\$](bold purple)";
-              error_symbol = "[\$](bold red)";
+              success_symbol = "[$$](bold purple)";
+              error_symbol = "[$$](bold red)";
             };
           };
         };
