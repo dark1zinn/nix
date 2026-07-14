@@ -5,6 +5,8 @@
     home-manager.backupFileExtension = "hm-bak";
 
     environment.variables = {
+      EDITOR = "hx";
+      VISUAL = "hx";
       XCURSOR_THEME = "macOS";
       XCURSOR_SIZE = "24";
       XCURSOR_SUPPRESS_RANDR_SIZE = "1";
