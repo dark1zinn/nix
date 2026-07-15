@@ -38,7 +38,7 @@
 
     environment.systemPackages = [
       (wrapElectronApp pkgs.vesktop)
-      (wrapElectronApp (pkgs.discord.override {withVencord = true;}))
+      # (wrapElectronApp (pkgs.discord.override {withVencord = true;}))
     ];
   };
 }
