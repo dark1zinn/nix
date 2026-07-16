@@ -14,6 +14,7 @@
       XCURSOR_THEME = "macOS";
       XCURSOR_SIZE = "24";
       XCURSOR_SUPPRESS_RANDR_SIZE = "1";
+      XKB_DEFAULT_LAYOUT = "br";
       TERMINAL = "kitty";
     };
 
