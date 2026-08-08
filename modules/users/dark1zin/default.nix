@@ -18,7 +18,7 @@
       self.nixosModules.dark1zin-zen-browser
       self.nixosModules.dark1zin-helium
       self.nixosModules.dark1zin-omp
-      self.nixosModules.dark1zin-discord
+      # self.nixosModules.dark1zin-discord
       self.nixosModules.dark1zin-niri
       self.nixosModules.dark1zin-dms-shell
       # self.nixosModules.dark1zin-noctalia  # swap compositor/shell here
