@@ -13,7 +13,7 @@
       self.nixosModules.dark1zin-kitty
       self.nixosModules.dark1zin-helix
       self.nixosModules.dark1zin-starship
-      self.nixosModules.dark1zin-gtk
+      # self.nixosModules.dark1zin-gtk
       self.nixosModules.dark1zin-vicinae
       self.nixosModules.dark1zin-zen-browser
       self.nixosModules.dark1zin-helium
