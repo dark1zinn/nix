@@ -15,7 +15,7 @@
       self.nixosModules.dark1zin-starship
       # self.nixosModules.dark1zin-gtk
       self.nixosModules.dark1zin-vicinae
-      self.nixosModules.dark1zin-zen-browser
+      # self.nixosModules.dark1zin-zen-browser
       self.nixosModules.dark1zin-helium
       self.nixosModules.dark1zin-omp
       # self.nixosModules.dark1zin-discord

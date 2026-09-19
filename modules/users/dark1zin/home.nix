@@ -64,13 +64,13 @@
       home.packages = with pkgs; [
         obsidian
         yazi
-        alacritty
         gh
         tmux
+        kew
+        nnn
         lazydocker
         lazygit
         fastfetch
-        labymod-launcher
         kdePackages.dolphin
       ];
 
