@@ -49,5 +49,11 @@
     llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} (
+      # Nix-valued assets are data files, not flake-parts modules.
+      inputs.import-tree.filterNot
+      (path: builtins.match ".*/assets/.*" path != null)
+      ./modules
+    );
 }
