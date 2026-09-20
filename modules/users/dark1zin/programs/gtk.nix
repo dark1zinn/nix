@@ -14,7 +14,7 @@
     };
     icon-theme-name = "macOS";
 
-    gtkCssDir = ../assets/gtk;
+    userName = config.preferences.user.name;
 
     # Material-style GTK color overrides (Matugen + Breeze palette).
     # Managed here so theming works with or without a desktop shell module.
@@ -24,10 +24,13 @@
       @import 'window_decorations.css';
     '';
 
-    deployGtkCss = version: {
-      "gtk-${version}/colors.css".source = "${gtkCssDir}/colors.css";
-      "gtk-${version}/dank-colors.css".source = "${gtkCssDir}/dank-colors.css";
-      "gtk-${version}/window_decorations.css".source = "${gtkCssDir}/window_decorations.css";
+    deployGtkCss = hmConfig: assetsRoot: version: {
+      "gtk-${version}/colors.css".source =
+        hmConfig.lib.file.mkOutOfStoreSymlink "${assetsRoot}/gtk/colors.css";
+      "gtk-${version}/dank-colors.css".source =
+        hmConfig.lib.file.mkOutOfStoreSymlink "${assetsRoot}/gtk/dank-colors.css";
+      "gtk-${version}/window_decorations.css".source =
+        hmConfig.lib.file.mkOutOfStoreSymlink "${assetsRoot}/gtk/window_decorations.css";
     };
 
     gtksettings = ''
@@ -66,7 +69,10 @@
       pkgs.gtk4
     ];
 
-    home-manager.users.${config.preferences.user.name} = {
+    home-manager.users.${userName} = {config, ...}: let
+      hmConfig = config;
+      assetsRoot = "${hmConfig.home.homeDirectory}/nixos/modules/users/dark1zin/assets";
+    in {
       gtk = {
         enable = true;
         theme = {
@@ -88,8 +94,8 @@
       };
 
       xdg.configFile = lib.mkMerge [
-        (deployGtkCss "3.0")
-        (deployGtkCss "4.0")
+        (deployGtkCss hmConfig assetsRoot "3.0")
+        (deployGtkCss hmConfig assetsRoot "4.0")
       ];
     };
   };

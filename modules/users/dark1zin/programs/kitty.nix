@@ -1,29 +1,29 @@
 {...}: {
   flake.nixosModules.dark1zin-kitty = {
     pkgs,
+    lib,
     config,
     ...
-  }: {
+  }: let
+    userName = config.preferences.user.name;
+  in {
     environment.systemPackages = [pkgs.kitty];
 
-    home-manager.users.${config.preferences.user.name} = {
+    home-manager.users.${userName} = {config, ...}: let
+      hmConfig = config;
+      assetsRoot = "${hmConfig.home.homeDirectory}/nixos/modules/users/dark1zin/assets";
+    in {
       programs.kitty = {
         enable = true;
         shellIntegration.enableBashIntegration = true;
-        font = {
-          package = pkgs.nerd-fonts.lilex;
-          name = "Lilex Nerd Font";
-        };
-        settings = {
-          font_features = "none";
-        };
       };
 
-      home.file = {
-        ".config/xdg-terminals.list".text = "
-           Kitty.desktop
-        ";
-      };
+      xdg.configFile."kitty/kitty.conf".source = lib.mkForce (
+        hmConfig.lib.file.mkOutOfStoreSymlink "${assetsRoot}/kitty/kitty.conf"
+      );
+
+      xdg.configFile."xdg-terminals.list".source =
+        hmConfig.lib.file.mkOutOfStoreSymlink "${assetsRoot}/kitty/xdg-terminals.list";
     };
   };
 }

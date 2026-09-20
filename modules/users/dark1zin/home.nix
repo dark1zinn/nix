@@ -1,9 +1,12 @@
 {inputs, ...}: {
   flake.nixosModules.dark1zin-home = {
     pkgs,
+    lib,
     config,
     ...
-  }: {
+  }: let
+    userName = config.preferences.user.name;
+  in {
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
     home-manager.backupFileExtension = "hm-bak";
@@ -25,9 +28,13 @@
       lg = "lazygit";
     };
 
-    home-manager.users.${config.preferences.user.name} = {
-      home.username = config.preferences.user.name;
-      home.homeDirectory = "/home/${config.preferences.user.name}";
+    home-manager.users.${userName} = {config, ...}: let
+      hmConfig = config;
+      # Keep this a string: flake-relative Nix paths are copied into the store.
+      assetsRoot = "${hmConfig.home.homeDirectory}/nixos/modules/users/dark1zin/assets";
+    in {
+      home.username = userName;
+      home.homeDirectory = "/home/${userName}";
       home.stateVersion = "25.11";
 
       home.activation.backupExistingConfigs = inputs.home-manager.lib.hm.dag.entryBefore ["writeBoundary"] ''
@@ -57,9 +64,8 @@
         done
       '';
 
-      xdg.configFile."nixpkgs/config.nix".text = ''
-        { allowUnfree = true; }
-      '';
+      xdg.configFile."nixpkgs/config.nix".source =
+        hmConfig.lib.file.mkOutOfStoreSymlink "${assetsRoot}/nixpkgs/config.nix";
 
       home.packages = with pkgs; [
         obsidian
@@ -86,10 +92,20 @@
         x11.enable = true;
       };
 
-      xresources.properties = {
-        "Xcursor.theme" = "macOS";
-        "Xcursor.size" = 26;
+      # The cursor module otherwise generates a competing store-backed file.
+      xresources.properties = lib.mkForce null;
+
+      home.file.".Xresources" = {
+        source = hmConfig.lib.file.mkOutOfStoreSymlink "${assetsRoot}/Xresources";
+        onChange = ''
+          if [[ -v DISPLAY ]]; then
+            ${lib.getExe pkgs.xrdb} -merge "$HOME/.Xresources"
+          fi
+        '';
       };
+
+      xsession.profileExtra =
+        ''${lib.getExe pkgs.xrdb} -merge "$HOME/.Xresources"'';
     };
   };
 }
