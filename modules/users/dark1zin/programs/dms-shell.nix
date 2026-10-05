@@ -6,9 +6,6 @@
         enable = true;
         restartIfChanged = true;
       };
-      enableVPN = false;
-      enableDynamicTheming = false;
-      enableCalendarEvents = false;
     };
 
     services.displayManager.dms-greeter = {
