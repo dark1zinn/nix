@@ -66,6 +66,9 @@
 
       xdg.configFile."nixpkgs/config.nix".source =
         hmConfig.lib.file.mkOutOfStoreSymlink "${assetsRoot}/nixpkgs/config.nix";
+      
+      xdg.configFile."tmux/tmux.conf".source =
+        hmConfig.lib.file.mkOutOfStoreSymlink "${assetsRoot}/tmux/tmux.conf";
 
       home.packages = with pkgs; [
         obsidian
