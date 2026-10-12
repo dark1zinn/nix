@@ -80,6 +80,7 @@
         lazydocker
         lazygit
         fastfetch
+        vesktop
         kdePackages.dolphin
       ];
 
