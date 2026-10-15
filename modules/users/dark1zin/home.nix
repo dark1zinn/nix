@@ -81,6 +81,7 @@
         lazygit
         fastfetch
         vesktop
+        labymod-launcher
         kdePackages.dolphin
       ];
 
