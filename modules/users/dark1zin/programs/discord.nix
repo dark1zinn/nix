@@ -2,6 +2,7 @@
   flake.nixosModules.dark1zin-discord = {pkgs, ...}: let
     # PipeWire capturer is required for Wayland screen sharing in Electron apps.
     pipewireCapturerFlags = "--enable-features=WebRTCPipeWireCapturer";
+    webRtcIpHandlingPolicy = "default_public_and_private_interfaces";
 
     wrapElectronApp = pkg:
       pkgs.symlinkJoin {
@@ -15,7 +16,14 @@
   in {
     nixpkgs.overlays = [
       (final: prev: {
-        vesktop = prev.vesktop.overrideAttrs (_: {
+        vesktop = prev.vesktop.overrideAttrs (old: {
+          postPatch = (old.postPatch or "") + ''
+            substituteInPlace src/main/main.ts \
+              --replace-fail \
+              'Settings.store.webRTCIPHandlingPolicy ?? "default"' \
+              'Settings.store.webRTCIPHandlingPolicy ?? "${webRtcIpHandlingPolicy}"'
+          '';
+
           preBuild = ''
             cp -r ${prev.electron.dist} electron-dist
             chmod -R u+w electron-dist
